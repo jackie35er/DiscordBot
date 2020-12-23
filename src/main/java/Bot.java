@@ -13,7 +13,7 @@ public class Bot extends ListenerAdapter
     public static void main(String[] args) throws LoginException
     {
 
-        JDABuilder.createLight("NzkxMjg0NzI3OTcyNzU3NTU0.X-M7VA.tTRNlEp2POwyA3M7f0MVd-qJTWE", GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
+        JDABuilder.createLight(${{ secrets.TOKEN }}, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
                 .addEventListeners(new Bot())
                 .setActivity(Activity.playing("Type (ping"))
                 .build();
