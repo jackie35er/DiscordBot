@@ -19,7 +19,7 @@ public class Bot extends ListenerAdapter
                 .addEventListeners(new Bot())
                 .setActivity(Activity.playing("Type (ping"))
                 .build();
-        System.out.println(${{ secret.TOKEN }});
+        System.out.println(${{ secrets.TOKEN }});
     }
 
     @Override
