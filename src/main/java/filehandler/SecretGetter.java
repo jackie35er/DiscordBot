@@ -13,12 +13,13 @@ public class SecretGetter {
     }
 
     public final String getSecret(){
+        System.out.println(System.getenv("TOKEN"));
         if(this.secret == Secrets.TOKEN){
             try {
                 return FileHandler.readFileFromRessourceAsString("secret/botToken");
             } catch (FileNotFoundException ignored) {
             }
         }
-        return null;// Cant ever be reached
+        return "";// Cant ever be reached
     }
 }
