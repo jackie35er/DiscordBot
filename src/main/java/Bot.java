@@ -17,6 +17,7 @@ public class Bot extends ListenerAdapter
                 .addEventListeners(new Bot())
                 .setActivity(Activity.playing("Type (ping"))
                 .build();
+                //test
     }
 
     @Override
