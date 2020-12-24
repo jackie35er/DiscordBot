@@ -18,10 +18,10 @@ public class Ping extends Command {
     @Override
     public void start(MessageReceivedEvent event) {
         MessageChannel channel = event.getChannel();
-        long time = System.currentTimeMillis();
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setDescription("Pong: `"+ (System.currentTimeMillis() - time)+ "`");
+        eb.setDescription("!Pong");
         eb.setColor(Color.blue);
         event.getChannel().sendMessage(eb.build()).queue();
     }
+
 }
