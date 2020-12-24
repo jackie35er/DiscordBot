@@ -11,7 +11,7 @@ import java.util.prefs.Preferences;
 
 
 public class Prefix extends Command {
-    private static String prefix = "-";
+    private static String prefix;
 
 
     static {
@@ -34,23 +34,17 @@ public class Prefix extends Command {
     }
 
     @Override
-    @SuppressWarnings("ConstantConditions")
+
     public void start(@NotNull MessageReceivedEvent event, String[] args){
 
         if(args.length == 0){
             printPrefix(event);
             return;
         }
-        switch (args[0]){
-            case "set":
-                setPrefixFromUser(event,args[1]);
-                break;
-            case "current":
-            case "now":
-            case "print":
-            default:
-                printPrefix(event);
-                break;
+        if ("set".equals(args[0])) {
+            setPrefixFromUser(event, args[1]);
+        } else {
+            printPrefix(event);
         }
 
 
@@ -61,7 +55,7 @@ public class Prefix extends Command {
         eb.setColor(Color.blue);
         event.getChannel().sendMessage(eb.build()).queue();
     }
-
+    @SuppressWarnings("ConstantConditions")
     private void setPrefixFromUser(MessageReceivedEvent event,String prefix){
         if(event.getAuthor().isBot()
                 || !event.getMember().hasPermission(Permission.MANAGE_SERVER)
