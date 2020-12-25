@@ -3,6 +3,7 @@ package Selector;
 import commands.GtfoTimer.GtfoTimer;
 import commands.ping.Ping;
 import commands.prefix.Prefix;
+import commands.randomintGenerator.randomintGenerator;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -35,6 +36,9 @@ public class Selector extends ListenerAdapter {
             case "gtfo":
             case "gtfotimer":
                 GtfoTimer.gtfotimer(event);
+                break;
+            case "random":
+                randomintGenerator.RandomintGenerator(event);
                 break;
             default:
         }

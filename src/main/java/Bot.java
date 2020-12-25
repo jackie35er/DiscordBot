@@ -40,32 +40,9 @@ public class Bot extends ListenerAdapter
             channel.sendMessage("your Mom is a hoe").queue();/* => RestAction<Message> */
         }
 
-        randomintGenerator(event);
-
     }
 
-    public void randomintGenerator(MessageReceivedEvent event)
-    {
-        Message msg = event.getMessage();
-        MessageChannel channel = event.getChannel();
-        try {
-            String[] snippets = msg.getContentRaw().split(" ");
 
-            if (snippets[0].equalsIgnoreCase("random")) {
-                int randomNum = ThreadLocalRandom.current().nextInt(Integer.parseInt(snippets[1]), Integer.parseInt(snippets[2]));
-
-                StringBuilder output = new StringBuilder("Your random Number is: ");
-                output.append(randomNum);
-                channel.sendMessage(output).queue();
-            }
-        }
-        catch(ArrayIndexOutOfBoundsException use)
-        {
-            channel.sendMessage("Wrong syntax: random min max").queue();
-            //use.printStackTrace();
-        }
-
-    }
 
 
 
