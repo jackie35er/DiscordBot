@@ -6,21 +6,22 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-
-import java.awt.*;
+import java.time.format.DateTimeParseException;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.security.auth.login.LoginException;
 
+
 public class Bot extends ListenerAdapter
 {
+
+
+
     public static void main(String[] args) throws LoginException
     {
-
 
         JDABuilder.createLight(new SecretGetter(Secrets.TOKEN).getSecret(), GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
                 .addEventListeners(new Selector())
@@ -39,6 +40,7 @@ public class Bot extends ListenerAdapter
             channel.sendMessage("your Mom is a hoe").queue();/* => RestAction<Message> */
         }
 
+        gtfotimer(event);
         randomintGenerator(event);
 
     }
@@ -61,11 +63,80 @@ public class Bot extends ListenerAdapter
         catch(ArrayIndexOutOfBoundsException use)
         {
             channel.sendMessage("Wrong syntax: random min max").queue();
-            System.out.println();
             //use.printStackTrace();
         }
 
     }
+
+    public void gtfotimer(MessageReceivedEvent event) {
+        Message msg = event.getMessage();
+        MessageChannel channel = event.getChannel();
+
+        try {
+            String[] snippets = msg.getContentRaw().split(" ");
+
+            if (snippets[0].equalsIgnoreCase("gtfotimer")) {
+
+                GtfoTimer.setMassageChannel(channel);
+
+                try {
+                    if (snippets.length == 2) {
+                        StringBuilder input = new StringBuilder(snippets[1]);
+                        input.append(":00");
+
+                        GtfoTimer.startnewtimer(input);
+
+                    } else if (snippets.length == 3) {
+                        StringBuilder input = new StringBuilder(snippets[1]);
+                        input.append(":00");
+
+                        GtfoTimer.startnewtimer(input);
+
+                        GtfoTimer.runddownName = snippets[2];
+                    } else {
+                        channel.sendMessage("Wrong syntax: gtfotimer hour:minute").queue();
+                    }
+                }
+                catch(DateTimeParseException use)
+                {
+                    if(snippets[1].equalsIgnoreCase("cancel"))
+                    {
+                        GtfoTimer.deletetimer();
+
+                    }
+                    else
+                    {
+                        GtfoTimer.runddownName = snippets[1];
+                    }
+
+                }
+
+                msg.delete().queue();
+
+            }
+            else if(snippets[0].equalsIgnoreCase("gtfo"))
+            {
+                if(snippets[1].equalsIgnoreCase("ac"))
+                {
+                    if(GtfoTimer.started)
+                    {
+                        GtfoTimer.addmitspieler(msg);
+                    }
+
+                }
+                msg.delete().queue();
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException use)
+        {
+            channel.sendMessage("Wrong syntax: gtfotimer hour:minute").queue();
+            //use.printStackTrace();
+        }
+
+
+
+    }
+
 
 
 }
