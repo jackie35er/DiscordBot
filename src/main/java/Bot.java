@@ -1,3 +1,5 @@
+import Selector.Selector;
+import net.dv8tion.jda.api.EmbedBuilder;
 import enmus.Secrets;
 import filehandler.SecretGetter;
 import net.dv8tion.jda.api.JDABuilder;
@@ -17,11 +19,12 @@ public class Bot extends ListenerAdapter
 {
 
 
+
     public static void main(String[] args) throws LoginException
     {
 
         JDABuilder.createLight(new SecretGetter(Secrets.TOKEN).getSecret(), GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
-                .addEventListeners(new Bot())
+                .addEventListeners(new Selector())
                 .setActivity(Activity.playing("Type (ping"))
                 .build();
 
