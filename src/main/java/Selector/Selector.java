@@ -1,5 +1,6 @@
 package Selector;
 
+import commands.GtfoTimer.GtfoTimer;
 import commands.ping.Ping;
 import commands.prefix.Prefix;
 import net.dv8tion.jda.api.entities.Message;
@@ -8,6 +9,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
+import javax.imageio.plugins.tiff.GeoTIFFTagSet;
 import java.util.Arrays;
 
 public class Selector extends ListenerAdapter {
@@ -29,6 +31,10 @@ public class Selector extends ListenerAdapter {
                 break;
             case "prefix":
                 new Prefix().start(event,Arrays.copyOfRange(args,1,args.length));
+                break;
+            case "gtfo":
+            case "gtfotimer":
+                GtfoTimer.gtfotimer(event);
                 break;
             default:
         }
