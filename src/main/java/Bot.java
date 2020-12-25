@@ -24,7 +24,7 @@ public class Bot extends ListenerAdapter
 
         JDABuilder.createLight(new SecretGetter(Secrets.TOKEN).getSecret(), GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
                 .addEventListeners(new Selector())
-                .setActivity(Activity.playing("Type (ping"))
+                .setActivity(Activity.playing("Type -ping"))
                 .build();
 
     }
