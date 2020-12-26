@@ -9,19 +9,19 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+
 import java.time.format.DateTimeParseException;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.security.auth.login.LoginException;
 
 
-public class Bot extends ListenerAdapter
-{
+public class Bot extends ListenerAdapter {
 
+    private Random random = new Random();
 
-
-    public static void main(String[] args) throws LoginException
-    {
+    public static void main(String[] args) throws LoginException {
 
         JDABuilder.createLight(new SecretGetter(Secrets.TOKEN).getSecret(), GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
                 .addEventListeners(new Selector())
@@ -31,12 +31,10 @@ public class Bot extends ListenerAdapter
     }
 
     @Override
-    public void onMessageReceived(MessageReceivedEvent event)
-    {
+    public void onMessageReceived(MessageReceivedEvent event) {
         Message msg = event.getMessage();
         MessageChannel channel = event.getChannel();
-        if (msg.getContentRaw().equals("(ping"))
-        {
+        if (msg.getContentRaw().equals("(ping")) {
             channel.sendMessage("your Mom is a hoe").queue();/* => RestAction<Message> */
         }
 
@@ -45,27 +43,33 @@ public class Bot extends ListenerAdapter
 
     }
 
-    public void randomintGenerator(MessageReceivedEvent event)
-    {
+    public void randomintGenerator(MessageReceivedEvent event) {
         Message msg = event.getMessage();
         MessageChannel channel = event.getChannel();
         try {
             String[] snippets = msg.getContentRaw().split(" ");
 
             if (snippets[0].equalsIgnoreCase("random")) {
-                int randomNum = ThreadLocalRandom.current().nextInt(Integer.parseInt(snippets[1]), Integer.parseInt(snippets[2]));
+                int min = Integer.parseInt(snippets[1]);
+                int max = Integer.parseInt(snippets[2]);
+                if (min > max) {
+                    throw new IllegalArgumentException();
+                }
+
+                int randomNum = random.nextInt(max - min) + min;
 
                 StringBuilder output = new StringBuilder("Your random Number is: ");
                 output.append(randomNum);
                 channel.sendMessage(output).queue();
             }
-        }
-        catch(ArrayIndexOutOfBoundsException use)
-        {
+        } catch (ArrayIndexOutOfBoundsException use) {
             channel.sendMessage("Wrong syntax: random min max").queue();
             //use.printStackTrace();
+        } catch (NumberFormatException e) {
+            channel.sendMessage("parameter needs to be a number!").queue();
+        } catch (IllegalArgumentException e) {
+            channel.sendMessage("min must be smaller than max!").queue();
         }
-
     }
 
     public void gtfotimer(MessageReceivedEvent event) {
@@ -96,16 +100,11 @@ public class Bot extends ListenerAdapter
                     } else {
                         channel.sendMessage("Wrong syntax: gtfotimer hour:minute").queue();
                     }
-                }
-                catch(DateTimeParseException use)
-                {
-                    if(snippets[1].equalsIgnoreCase("cancel"))
-                    {
+                } catch (DateTimeParseException use) {
+                    if (snippets[1].equalsIgnoreCase("cancel")) {
                         GtfoTimer.deletetimer();
 
-                    }
-                    else
-                    {
+                    } else {
                         GtfoTimer.runddownName = snippets[1];
                     }
 
@@ -113,30 +112,22 @@ public class Bot extends ListenerAdapter
 
                 msg.delete().queue();
 
-            }
-            else if(snippets[0].equalsIgnoreCase("gtfo"))
-            {
-                if(snippets[1].equalsIgnoreCase("ac"))
-                {
-                    if(GtfoTimer.started)
-                    {
+            } else if (snippets[0].equalsIgnoreCase("gtfo")) {
+                if (snippets[1].equalsIgnoreCase("ac")) {
+                    if (GtfoTimer.started) {
                         GtfoTimer.addmitspieler(msg);
                     }
 
                 }
                 msg.delete().queue();
             }
-        }
-        catch(ArrayIndexOutOfBoundsException use)
-        {
+        } catch (ArrayIndexOutOfBoundsException use) {
             channel.sendMessage("Wrong syntax: gtfotimer hour:minute").queue();
             //use.printStackTrace();
         }
 
 
-
     }
-
 
 
 }
