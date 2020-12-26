@@ -1,5 +1,7 @@
 package filehandler;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
@@ -10,7 +12,7 @@ public class FileHandler {
      * @return Inhalt des Files
      * @throws FileNotFoundException Tritt auf wenn das File in ressource nicht exestiert
      */
-    public static String readFileFromRessourceAsString(String fileName) throws FileNotFoundException{
+    public static String readFileFromRessourceAsString(@NotNull String fileName) throws FileNotFoundException{
         StringBuilder builder = new StringBuilder();
         String str;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(FileHandler.readFileFromRessourceAsInputStream(fileName), StandardCharsets.UTF_8));) {
@@ -30,7 +32,7 @@ public class FileHandler {
      * @return Inhalt des Files als InputStream
      * @throws FileNotFoundException Tritt auf wenn das File in ressource nicht exestiert
      */
-    public static InputStream readFileFromRessourceAsInputStream(String fileName) throws FileNotFoundException{
+    public static InputStream readFileFromRessourceAsInputStream(@NotNull String fileName) throws FileNotFoundException{
         InputStream is;
         is = FileHandler.class.getClassLoader().getResourceAsStream(fileName);
         if(is == null){

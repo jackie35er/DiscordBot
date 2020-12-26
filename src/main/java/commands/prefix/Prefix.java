@@ -13,7 +13,6 @@ import java.util.prefs.Preferences;
 public class Prefix extends Command {
     private static String prefix;
 
-
     static {
         Preferences prefs = Preferences.userNodeForPackage(Prefix.class);
         if(prefs.get("prefix",null) == null){
@@ -21,7 +20,6 @@ public class Prefix extends Command {
         }
         prefix = prefs.get("prefix","-");
     }
-
 
     public static String getPrefix() {
         return prefix;
@@ -34,9 +32,7 @@ public class Prefix extends Command {
     }
 
     @Override
-
-    public void start(@NotNull MessageReceivedEvent event, String[] args){
-
+    public void start(@NotNull MessageReceivedEvent event,@NotNull String[] args){
         if(args.length == 0){
             printPrefix(event);
             return;
@@ -46,15 +42,15 @@ public class Prefix extends Command {
         } else {
             printPrefix(event);
         }
-
-
     }
+
     private void printPrefix(MessageReceivedEvent event){
         EmbedBuilder eb = new EmbedBuilder();
         eb.setDescription("Current Prefix: `" +prefix+"`");
         eb.setColor(Color.blue);
         event.getChannel().sendMessage(eb.build()).queue();
     }
+
     @SuppressWarnings("ConstantConditions")
     private void setPrefixFromUser(MessageReceivedEvent event,String prefix){
         if(event.getAuthor().isBot()
@@ -76,5 +72,4 @@ public class Prefix extends Command {
         eb.setDescription("New Prefix: `"+ prefix +"`");
         event.getChannel().sendMessage(eb.build()).queue();
     }
-
 }

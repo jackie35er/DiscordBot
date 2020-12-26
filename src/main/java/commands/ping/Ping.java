@@ -3,15 +3,12 @@ package commands.ping;
 import commands.Command;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.events.message.GenericMessageEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 
 
 public class Ping extends Command {
-
 
     public Ping(){
 
@@ -24,5 +21,4 @@ public class Ping extends Command {
         eb.setColor(Color.blue);
         event.getChannel().sendMessage(eb.build()).queue();
     }
-
 }
