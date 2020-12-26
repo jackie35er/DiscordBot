@@ -54,16 +54,11 @@ public class GtfoTimer {
                     } else {
                         channel.sendMessage("Wrong syntax: gtfotimer hour:minute").queue();
                     }
-                }
-                catch(DateTimeParseException use)
-                {
-                    if(snippets[1].equalsIgnoreCase("cancel"))
-                    {
+                } catch (DateTimeParseException use) {
+                    if (snippets[1].equalsIgnoreCase("cancel")) {
                         GtfoTimer.deletetimer();
 
-                    }
-                    else
-                    {
+                    } else {
                         GtfoTimer.runddownName = snippets[1];
                     }
 
@@ -71,53 +66,38 @@ public class GtfoTimer {
 
                 msg.delete().queue();
 
-            }
-            else if(snippets[0].equalsIgnoreCase("gtfo"))
-            {
-                if(snippets[1].equalsIgnoreCase("ac"))
-                {
-                    if(GtfoTimer.started)
-                    {
+            } else if (snippets[0].equalsIgnoreCase("gtfo")) {
+                if (snippets[1].equalsIgnoreCase("ac")) {
+                    if (GtfoTimer.started) {
                         GtfoTimer.addmitspieler(msg);
                     }
 
                 }
                 msg.delete().queue();
             }
-        }
-        catch(ArrayIndexOutOfBoundsException use)
-        {
+        } catch (ArrayIndexOutOfBoundsException use) {
             channel.sendMessage("Wrong syntax: gtfotimer hour:minute").queue();
             //use.printStackTrace();
         }
-
-
-
     }
 
     public static void setMassageChannel(MessageChannel newchannel) {
         channel = newchannel;
     }
 
+    private static String getallPlayers(String zeroplayermassage) {
 
-    private static String getallPlayers(String zeroplayermassage)
-    {
-
-        StringBuilder output=new StringBuilder();
-        for (String l:GtfoTimer.mittspieler) {
+        StringBuilder output = new StringBuilder();
+        for (String l : GtfoTimer.mittspieler) {
             output.append(l);
             output.append(", ");
-
         }
 
-
-        if(output.toString().length() == 0) {
+        if (output.toString().length() == 0) {
             output.append(zeroplayermassage);
+        } else {
+            output.delete(output.toString().length() - 2, output.toString().length());
         }
-        else {
-            output.delete(output.toString().length()-2,output.toString().length());
-        }
-
 
         return output.toString();
     }
@@ -130,19 +110,15 @@ public class GtfoTimer {
             case 4 -> 0.29F;
             default -> 0F;
         };
-
     }
 
-    public static void addmitspieler(Message msg)
-    {
-        if(!mittspieler.contains(msg.getAuthor().getName()))
+    public static void addmitspieler(Message msg) {
+        if (!mittspieler.contains(msg.getAuthor().getName()))
             mittspieler.add(msg.getAuthor().getName());
     }
 
-    public static void deletetimer()
-    {
-        if(!LocalTime.now().isAfter(GtfoTimer.gamestart))
-        {
+    public static void deletetimer() {
+        if (!LocalTime.now().isAfter(GtfoTimer.gamestart)) {
             GtfoTimer.deletemassage = true;
         }
     }
@@ -160,8 +136,7 @@ public class GtfoTimer {
 
         GtfoTimer.gamestart = LocalTime.parse(newtime);
 
-        if(LocalTime.now().isAfter(GtfoTimer.gamestart))
-        {
+        if (LocalTime.now().isAfter(GtfoTimer.gamestart)) {
             channel.sendMessage("This Time is over! @Rafael ;)").queue();
             return;
         }
@@ -171,38 +146,32 @@ public class GtfoTimer {
         channel.sendMessage(embed).queue(message -> {
             themessage = message.getId();
             //System.out.println(themessage);
-            while(true)
-            {
+            while (true) {
                 eb.setTitle("GTFO Timer:");
-                 if(GtfoTimer.runddownName == null)
-                 {
-                     eb.setDescription("Next Rundown in " + timeuntilGamestart().getHour() + " h " + timeuntilGamestart().getMinute() + " min " + timeuntilGamestart().getSecond() + " sec\n"
-                                        + "Prisoners: " + getallPlayers("NONE :(") + "\n"
-                                        + "gtfotimer cancel to cancel timer\n"
-                                        + "gtfo ac to accept");
-                 }
-                 else
-                 {
-                     eb.setDescription("Next Rundown(" + GtfoTimer.runddownName + ") in " + timeuntilGamestart().getHour() + " h " + timeuntilGamestart().getMinute() + " min " + timeuntilGamestart().getSecond() + " sec\n"
-                                        + "Prisoners: " + getallPlayers("NONE :(") + "\n"
-                                        + "gtfotimer cancel to cancel timer\n"
-                                        + "gtfo ac to accept");
-                 }
+                if (GtfoTimer.runddownName == null) {
+                    eb.setDescription("Next Rundown in " + timeuntilGamestart().getHour() + " h " + timeuntilGamestart().getMinute() + " min " + timeuntilGamestart().getSecond() + " sec\n"
+                            + "Prisoners: " + getallPlayers("NONE :(") + "\n"
+                            + "gtfotimer cancel to cancel timer\n"
+                            + "gtfo ac to accept");
+                } else {
+                    eb.setDescription("Next Rundown(" + GtfoTimer.runddownName + ") in " + timeuntilGamestart().getHour() + " h " + timeuntilGamestart().getMinute() + " min " + timeuntilGamestart().getSecond() + " sec\n"
+                            + "Prisoners: " + getallPlayers("NONE :(") + "\n"
+                            + "gtfotimer cancel to cancel timer\n"
+                            + "gtfo ac to accept");
+                }
 
-                eb.setColor(Color.getHSBColor(gethue(),1F, 1F));
-                channel.editMessageById(themessage,eb.build()).queue();
+                eb.setColor(Color.getHSBColor(gethue(), 1F, 1F));
+                channel.editMessageById(themessage, eb.build()).queue();
 
-                if(LocalTime.now().isAfter(GtfoTimer.gamestart))
-                {
+                if (LocalTime.now().isAfter(GtfoTimer.gamestart)) {
                     eb.setDescription("Starting Game with: " + getallPlayers("Nobody :("));
-                    eb.setColor(Color.getHSBColor(0.70F,1F, 1F));
-                    channel.editMessageById(themessage,eb.build()).queue();
+                    eb.setColor(Color.getHSBColor(0.70F, 1F, 1F));
+                    channel.editMessageById(themessage, eb.build()).queue();
                     GtfoTimer.started = false;
                     break;
                 }
 
-                if(deletemassage)
-                {
+                if (deletemassage) {
                     GtfoTimer.deletemassage = false;
                     GtfoTimer.started = false;
                     channel.deleteMessageById(themessage).queue();
@@ -217,19 +186,15 @@ public class GtfoTimer {
 
             }
         });
-
-
     }
 
-    public static LocalTime timeuntilGamestart()
-    {
+    public static LocalTime timeuntilGamestart() {
 
         LocalTime localTime = LocalTime.now();
         LocalTime diff;
 
-        diff = LocalTime.of(gamestart.minusHours(localTime.getHour()).getHour(),gamestart.minusMinutes(localTime.getMinute()).getMinute(),gamestart.minusSeconds(localTime.getSecond()).getSecond());
+        diff = LocalTime.of(gamestart.minusHours(localTime.getHour()).getHour(), gamestart.minusMinutes(localTime.getMinute()).getMinute(), gamestart.minusSeconds(localTime.getSecond()).getSecond());
 
         return diff.minusMinutes(1);
     }
-
 }

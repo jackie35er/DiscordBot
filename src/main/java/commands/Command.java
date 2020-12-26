@@ -14,9 +14,4 @@ public abstract class Command {
 
     public void start(MessageReceivedEvent event){}
     public void start(MessageReceivedEvent event,String ... args){}
-
-
-
-
-
 }
