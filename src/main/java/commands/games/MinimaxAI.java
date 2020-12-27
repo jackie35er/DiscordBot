@@ -7,11 +7,12 @@ import net.dv8tion.jda.internal.utils.tuple.Pair;
 import org.apache.commons.collections4.list.TreeList;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class  MinimaxAI<F extends Copyable<F>> {
 
-    private List<F> field = new TreeList<>();
+    private List<F> field = new ArrayList<>();
 
     public MinimaxAI(List<F> field) {
         this.field = field;
@@ -21,7 +22,7 @@ public abstract class  MinimaxAI<F extends Copyable<F>> {
     }
 
     public List<F> getField() {
-        return field;
+        return new TreeList<>(field);
     }
 
     public void setField(List<F> field) {

@@ -15,7 +15,6 @@ public class Ping extends Command {
     }
     @Override
     public void start(MessageReceivedEvent event) {
-        MessageChannel channel = event.getChannel();
         EmbedBuilder eb = new EmbedBuilder();
         eb.setDescription("!Pong");
         eb.setColor(Color.blue);

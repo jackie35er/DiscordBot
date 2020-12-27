@@ -9,14 +9,14 @@ import java.util.List;
 
 public class TicTacToeAI extends MinimaxAI<Field> {
     public TicTacToeAI(List<Field> field) {
-        super(new TreeList<>(field));
+        super(new ArrayList<>(field));
         if(field.size() != 9){
             throw new IllegalArgumentException("size of field has to be 9" );
         }
     }
 
     public TicTacToeAI() {
-        List<Field> fieldList = new TreeList<>();
+        List<Field> fieldList = new ArrayList<>();
         for(int i = 0; i < 3;i++){
             for(int j = 0; j < 3; j++){
                 fieldList.add(new Field(i,j));

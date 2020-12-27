@@ -2,6 +2,7 @@ package filehandler;
 
 import enmus.Secrets;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class SecretGetter {
     Secrets secret;
@@ -14,7 +15,7 @@ public class SecretGetter {
         if(this.secret == Secrets.TOKEN){
             try {
                 return FileHandler.readFileFromRessourceAsString("secret/botToken");
-            } catch (FileNotFoundException ignored) {
+            } catch (IOException ignored) {
             }
         }
         return "";

@@ -35,6 +35,7 @@ public class Selector extends ListenerAdapter {
                 break;
             case "play":
                 new GameSelector().start(event,Arrays.copyOfRange(args,1,args.length));
+                break;
             default:
         }
     }

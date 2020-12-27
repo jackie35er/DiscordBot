@@ -12,7 +12,7 @@ import java.util.Set;
 public class TicTacToeController{
     private static final Map<Pair<String,String>,TicTacToeSeasion> seasions = new HashMap<>();
 
-    public static boolean newGame(String ...players){
+    public static boolean newGame(String... players){
 
     }
 

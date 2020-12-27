@@ -12,16 +12,13 @@ public class FileHandler {
      * @return Inhalt des Files
      * @throws FileNotFoundException Tritt auf wenn das File in ressource nicht exestiert
      */
-    public static String readFileFromRessourceAsString(@NotNull String fileName) throws FileNotFoundException{
+    public static String readFileFromRessourceAsString(@NotNull String fileName) throws IOException{
         StringBuilder builder = new StringBuilder();
         String str;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(FileHandler.readFileFromRessourceAsInputStream(fileName), StandardCharsets.UTF_8));) {
             while((str = br.readLine()) != null) {
                 builder.append(str);
             }
-        }
-        catch(IOException e){
-            throw new FileNotFoundException("File in ressource not found");
         }
         return builder.toString();
     }

@@ -3,11 +3,21 @@ package commands.games.ticTacToe;
 import interfaces.Copyable;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 public class Field implements Comparable<Field>, Copyable<Field> {
     private int x;
     private int y;
+
+    public Field(int x, int y, int state) {
+        this.x = x;
+        this.y = y;
+        this.state = state;
+    }
+    public Field(int x,int y){
+        this(x,y,0);
+    }
 
     /*
     saves current state of the board
@@ -41,15 +51,6 @@ public class Field implements Comparable<Field>, Copyable<Field> {
         this.state = state;
     }
 
-    public Field(int x, int y, int state) {
-        this.x = x;
-        this.y = y;
-        this.state = state;
-    }
-    public Field(int x,int y){
-        this(x,y,0);
-    }
-
     @Override
     public String toString() {
         return "Field{" + "x=" + x +
@@ -60,12 +61,9 @@ public class Field implements Comparable<Field>, Copyable<Field> {
 
     @Override
     public int compareTo(@NotNull Field o) {
-        if(this.x == o.getX()){
-            return Integer.compare(this.y,o.getY());
-        }
-        else{
-            return Integer.compare(this.x,o.getX());
-        }
+        return Comparator.comparing(Field::getX)
+                .thenComparing(Field::getY)
+                .compare(this, o);
     }
 
     @Override
