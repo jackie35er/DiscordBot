@@ -1,8 +1,6 @@
 package filehandler;
 
 import enmus.Secrets;
-
-
 import java.io.FileNotFoundException;
 
 public class SecretGetter {
