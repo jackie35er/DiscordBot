@@ -3,6 +3,8 @@ package commands.games.ticTacToe;
 import interfaces.Copyable;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class Field implements Comparable<Field>, Copyable<Field> {
     private int x;
     private int y;
@@ -69,5 +71,18 @@ public class Field implements Comparable<Field>, Copyable<Field> {
     @Override
     public Field copy() {
         return new Field(this.x,this.y,this.state);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Field field = (Field) o;
+        return x == field.x && y == field.y && state == field.state;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, state);
     }
 }

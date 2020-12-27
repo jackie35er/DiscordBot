@@ -1,6 +1,7 @@
 package commands.games;
 
 import interfaces.Copyable;
+import net.dv8tion.jda.internal.utils.tuple.ImmutablePair;
 import net.dv8tion.jda.internal.utils.tuple.MutablePair;
 import net.dv8tion.jda.internal.utils.tuple.Pair;
 import org.apache.commons.collections4.list.TreeList;
@@ -44,7 +45,7 @@ public abstract class  MinimaxAI<F extends Copyable<F>> {
 
     public Pair<Integer,List<F>> minimax(List<F> field, int depth,int alpha,int beta, boolean player){
         if(depth == 0 || this.isGameOver(field)){
-            return new MutablePair<>(evaluatePosition(field),field);
+            return Pair.of(evaluatePosition(field),field);
         }
         if(player){
             int maxEval = Integer.MIN_VALUE;

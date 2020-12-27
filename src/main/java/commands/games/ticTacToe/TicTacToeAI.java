@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TicTacToeAI extends MinimaxAI<Field> {
     public TicTacToeAI(List<Field> field) {
-        super(field);
+        super(new TreeList<>(field));
         if(field.size() != 9){
             throw new IllegalArgumentException("size of field has to be 9" );
         }

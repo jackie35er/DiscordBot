@@ -19,6 +19,6 @@ public class SecretGetter {
             } catch (FileNotFoundException ignored) {
             }
         }
-        return "";// Cant ever be reached
+        return "";
     }
 }

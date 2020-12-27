@@ -35,7 +35,7 @@ public class Prefix extends Command {
 
     @Override
 
-    public void start(@NotNull MessageReceivedEvent event, String[] args){
+    public void start(@NotNull MessageReceivedEvent event, String [] args){
 
         if(args.length == 0){
             printPrefix(event);
