@@ -12,14 +12,17 @@ import java.io.IOException;
 
 public class BoardImageGenerator {
 
-    private final BufferedImage CROSS = ImageIO.read(FileHandler.readFileFromRessourceAsInputStream(Images.TICTACTOE_CROSS.getFilename()));
-    private final BufferedImage CIRCLE = ImageIO.read(FileHandler.readFileFromRessourceAsInputStream(Images.TICTACTOE_CIRCLE.getFilename()));
-    private final BufferedImage currentBoard = ImageIO.read(FileHandler.readFileFromRessourceAsInputStream(Images.TICTACTOE_FIELD.getFilename()));
+    private final BufferedImage CROSS;
+    private final BufferedImage CIRCLE;
+    private final BufferedImage currentBoard;
 
     private final String TEMP_DIR = System.getProperty("java.io.tmpdir");
 
 
     public BoardImageGenerator() throws IOException {
+        CROSS = ImageIO.read(FileHandler.readFileFromRessourceAsInputStream(Images.TICTACTOE_CROSS.getFilename()));
+        CIRCLE = ImageIO.read(FileHandler.readFileFromRessourceAsInputStream(Images.TICTACTOE_CIRCLE.getFilename()));
+        currentBoard = ImageIO.read(FileHandler.readFileFromRessourceAsInputStream(Images.TICTACTOE_FIELD.getFilename()));
     }
 
 
