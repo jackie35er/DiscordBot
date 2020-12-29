@@ -13,6 +13,16 @@ public class AI implements Player<Field> {
         return getBoardDiffrence(fields, new TicTacToeAI().nextMove(fields, -1, side));//-1 depth calculates all moves
     }
 
+    @Override
+    public String getPlayerId() {
+        return this.toString();
+    }
+
+    @Override
+    public Boolean isHuman() {
+        return false;
+    }
+
     private static Optional<Field> getBoardDiffrence(List<Field> f1, List<Field> f2) {
         for (int i = 0; i < f1.size(); i++) {
             if (f1.get(i) != f2.get(i)) {
@@ -20,5 +30,15 @@ public class AI implements Player<Field> {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public String toString() {
+        return "Ai";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof AI;
     }
 }

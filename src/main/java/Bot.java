@@ -18,13 +18,13 @@ public class Bot extends ListenerAdapter {
                 .setActivity(Activity.playing("Type -ping"))
                 .build();
     }
-
+    //Just test junk from here
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         Message msg = event.getMessage();
         MessageChannel channel = event.getChannel();
         if (msg.getContentRaw().equals("(ping")) {
-            channel.sendMessage("your Mom is a hoe").queue();/* => RestAction<Message> */
+            channel.sendMessage("asdf").queue();/* => RestAction<Message> */
         }
         randomintGenerator(event);
     }

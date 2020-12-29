@@ -18,7 +18,6 @@ public class BoardImageGenerator {
 
     private final String TEMP_DIR = System.getProperty("java.io.tmpdir");
 
-
     public BoardImageGenerator() throws IOException {
     }
 
@@ -31,8 +30,9 @@ public class BoardImageGenerator {
         g.drawImage(imageToAdd, xCord, yCord, null);
     }
 
-    public void safeToTemp(String filename) throws IOException {
-        ImageIO.write(currentBoard, "PNG", new File(TEMP_DIR + filename));
+    public File safeToTemp(String filename) throws IOException {
+        ImageIO.write(currentBoard, "PNG", new File(TEMP_DIR + filename + ".png"));
+        return new File(TEMP_DIR +filename + ".png");
     }
 
     public boolean deleteFromTemp(String filename) {

@@ -1,11 +1,13 @@
 package commands.games;
 
 import interfaces.Player;
-import net.dv8tion.jda.api.entities.Message;
+
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.requests.restaction.MessageAction;
 
 import java.util.List;
 
-public abstract class GameSeasion<F>{
+public abstract class GameSeasion<F> {
     private Player<F> player1;
     private Player<F> player2;
 
@@ -14,9 +16,16 @@ public abstract class GameSeasion<F>{
 
     private List<F> board;
 
-    private boolean turn;
+    private String oldMessageId;
 
-    private Message msg;
+    public String getOldMessageId() {
+        return oldMessageId;
+    }
+
+    public void setOldMessageId(String oldMessageId) {
+        this.oldMessageId = oldMessageId;
+    }
+
 
     public abstract void startGame();
 
@@ -61,12 +70,4 @@ public abstract class GameSeasion<F>{
     }
 
     public abstract void makeMove();
-
-    public Message getMsg() {
-        return msg;
-    }
-
-    public void setMsg(Message msg) {
-        this.msg = msg;
-    }
 }
