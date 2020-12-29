@@ -13,7 +13,7 @@ public class TicTacToeSeasion extends GameSeasion<Field> {
     private final List<Field> fields = new ArrayList<>();
     private BoardImageGenerator image;
 
-    private TicTacToeSeasion(Player<Field> p1, Player<Field> p2){
+    private TicTacToeSeasion(Player<Field> p1, Player<Field> p2) {
         try {
             image = new BoardImageGenerator();
         } catch (IOException e) {
@@ -26,9 +26,9 @@ public class TicTacToeSeasion extends GameSeasion<Field> {
 
     @Override
     public void startGame() {
-        for(int i = 0; i < 3; i++){
-            for (int j = 0; j < 3;j++){
-                fields.add(new Field(i,j,0));
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                fields.add(new Field(i, j, 0));
             }
         }
     }
@@ -38,13 +38,11 @@ public class TicTacToeSeasion extends GameSeasion<Field> {
 
     }
 
-    public static TicTacToeSeasion of(Player<Field> p1, Player<Field> p2){
-        return new TicTacToeSeasion(p1,p2);
+    public static TicTacToeSeasion of(Player<Field> p1, Player<Field> p2) {
+        return new TicTacToeSeasion(p1, p2);
     }
 
     public File getBoardStateImage() throws IOException {
         return image.safeToTemp(super.getPlayer1().toString());
     }
-
-
 }

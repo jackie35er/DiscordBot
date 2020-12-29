@@ -36,18 +36,14 @@ public class TicTacToeController {
     }
 
     public static Map<Pair<Player<Field>, Player<Field>>, TicTacToeSeasion> getSeasions() {
-        return seasions;
+        return new HashMap<>(seasions);
     }
 
     public static boolean inGame(String playerId) {
-        return
-                seasions.keySet()
+        return seasions.keySet()
                         .stream()
-                        .anyMatch(players -> players.getLeft().getPlayerId().equals(playerId))
-                        ||
-                        seasions.keySet()
-                                .stream()
-                                .anyMatch(players -> players.getRight().getPlayerId().equals(playerId));
+                        .anyMatch(players -> players.getLeft().getPlayerId().equals(playerId)
+                                || players.getRight().getPlayerId().equals(playerId));
     }
 
     public void sendMessage(MessageChannel channel, MessageAction msg, GameSeasion<Field> seasion) {
