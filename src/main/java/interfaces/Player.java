@@ -11,7 +11,9 @@ public interface Player<F> {
 
     String getPlayerId();
 
-    Boolean isHuman();
+    boolean isHuman();
 
     boolean equals(Object obj);
+
+    int hashCode();
 }

@@ -4,7 +4,6 @@ import commands.games.ticTacToe.Field;
 import interfaces.Player;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Human implements Player<Field> {
     private String playerId;
@@ -45,7 +44,7 @@ public class Human implements Player<Field> {
     }
 
     @Override
-    public Boolean isHuman() {
+    public boolean isHuman() {
         return true;
     }
 }

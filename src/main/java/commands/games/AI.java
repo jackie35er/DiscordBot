@@ -5,6 +5,7 @@ import commands.games.ticTacToe.TicTacToeAI;
 import interfaces.Player;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class AI implements Player<Field> {
@@ -19,7 +20,7 @@ public class AI implements Player<Field> {
     }
 
     @Override
-    public Boolean isHuman() {
+    public boolean isHuman() {
         return false;
     }
 
@@ -35,6 +36,11 @@ public class AI implements Player<Field> {
     @Override
     public String toString() {
         return "Ai";
+    }
+
+    @Override
+    public int hashCode() {
+        return 88;
     }
 
     @Override
