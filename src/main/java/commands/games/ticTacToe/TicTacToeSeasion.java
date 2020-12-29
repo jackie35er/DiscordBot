@@ -13,15 +13,12 @@ public class TicTacToeSeasion extends GameSeasion<Field> {
     private final List<Field> fields = new ArrayList<>();
     private BoardImageGenerator image;
 
-    {
+    private TicTacToeSeasion(Player<Field> p1, Player<Field> p2){
         try {
             image = new BoardImageGenerator();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private TicTacToeSeasion(Player<Field> p1, Player<Field> p2){
         super.setPlayer1(p1);
         super.setPlayer2(p2);
         startGame();
