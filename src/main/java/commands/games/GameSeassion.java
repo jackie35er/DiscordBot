@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.requests.restaction.MessageAction;
 
 import java.util.List;
 
-public abstract class GameSeasion<F> {
+public abstract class GameSeassion<F> {
     private Player<F> player1;
     private Player<F> player2;
 
@@ -16,16 +16,15 @@ public abstract class GameSeasion<F> {
 
     private List<F> board;
 
-    private String oldMessageId;
+    private String messageId = "0";
 
-    public String getOldMessageId() {
-        return oldMessageId;
+    public String getMessageId() {
+        return messageId;
     }
 
-    public void setOldMessageId(String oldMessageId) {
-        this.oldMessageId = oldMessageId;
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
     }
-
 
     public abstract void startGame();
 

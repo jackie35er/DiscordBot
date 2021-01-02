@@ -1,6 +1,6 @@
 package commands.games.ticTacToe;
 
-import commands.games.GameSeasion;
+import commands.games.GameSeassion;
 import interfaces.Player;
 
 import java.io.File;
@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TicTacToeSeasion extends GameSeasion<Field> {
+public class TicTacToeSeassion extends GameSeassion<Field> {
     private final List<Field> fields = new ArrayList<>();
     private BoardImageGenerator image;
 
-    private TicTacToeSeasion(Player<Field> p1, Player<Field> p2) {
+    private TicTacToeSeassion(Player<Field> p1, Player<Field> p2) {
         try {
             image = new BoardImageGenerator();
         } catch (IOException e) {
@@ -38,8 +38,8 @@ public class TicTacToeSeasion extends GameSeasion<Field> {
 
     }
 
-    public static TicTacToeSeasion of(Player<Field> p1, Player<Field> p2) {
-        return new TicTacToeSeasion(p1, p2);
+    public static TicTacToeSeassion of(Player<Field> p1, Player<Field> p2) {
+        return new TicTacToeSeassion(p1, p2);
     }
 
     public File getBoardStateImage() throws IOException {

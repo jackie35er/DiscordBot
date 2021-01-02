@@ -34,12 +34,12 @@ public class AI implements Player<Field> {
 
     @Override
     public String toString() {
-        return "Ai";
+        return "Humanity shall be destroyed";
     }
 
     @Override
     public int hashCode() {
-        return 88;
+        return 69;
     }
 
     @Override

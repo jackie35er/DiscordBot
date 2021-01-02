@@ -15,5 +15,5 @@ public abstract class Command {
     public void start(GenericMessageEvent event,String ... args){}
 
     public void start(MessageReceivedEvent event){}
-    public void start(MessageReceivedEvent event,String ... args) throws IOException {}
+    public void start(MessageReceivedEvent event,String ... args) {}
 }

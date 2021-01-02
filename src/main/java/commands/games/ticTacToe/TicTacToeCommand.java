@@ -13,8 +13,9 @@ import java.io.IOException;
 public class TicTacToeCommand extends Command {
 
     public void start(MessageReceivedEvent event, String ... args) {
+
         if(args.length == 0){
-            if(TicTacToeController.inGame(event.getAuthor().getId())){
+            if(false){
                 EmbedBuilder eb = new EmbedBuilder();
                 eb.setColor(Color.red);
                 eb.setTitle("You are already in a game");
@@ -23,7 +24,7 @@ public class TicTacToeCommand extends Command {
             }
             else{
                 try {
-                    TicTacToeController.newGame(event.getChannel(),event.getAuthor().getId());
+                    TicTacToeController.sendMessage(event.getChannel().sendMessage("asdf"),TicTacToeController.newGame(event.getChannel(),event.getAuthor().getId()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
